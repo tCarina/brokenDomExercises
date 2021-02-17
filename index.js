@@ -1,118 +1,102 @@
-
 const disemvowel = () => {
-    const el = document.querySelector("#name-to-disemvowel");
-    const p = document.querySelector(".disemvowel-string");
-    const str = el.value;
-    let output = "";
-    const vowels = "aeiouAEIOU"; 
-    for(const char of str) {
-        if(!vowels.includes(char)) {
-            output += char;
-        }
+  const el = document.querySelector("#name-to-disemvowel");
+  const p = document.querySelector(".disemvowel-string");
+  const str = el.value;
+  let output = "";
+  const vowels = "aeiouAEIOU";
+  for (const char of str) {
+    if (!vowels.includes(char)) {
+      output += char;
     }
-    p.textContent = output;
-}
+  }
+  p.textContent = output;
+};
 
 const isPalindrome = () => {
-    const str = document.querySelector("#is-palindrome-input").value;
-    const p = document.querySelector("#is-palindrome-p");
-    let palindrome = ""
-    for(let i = str.length - 1; i >= 0 ; i--) {
-        palindrome += str[i]
-    }
-    if(str === palindrome){
-        p.innerText = true
-    } else {
-        p.innerText = false
-    }
-    
-}
+  const str = document.querySelector("#is-palindrome-input").value;
+  const p = document.querySelector("#is-palindrome-p");
+  let palindrome = "";
+  for (let i = str.length - 1; i >= 0; i--) {
+    palindrome += str[i];
+  }
+  if (str === palindrome) {
+    p.innerText = true;
+  } else {
+    p.innerText = false;
+  }
+};
 
 let list = document.querySelectorAll("#favorite-numbers li");
-    let arr = []; 
-
-    list.forEach(listItem => {
-         arr.push(Number(listItem.innerText))
-    })
+let arr = [];
+list.forEach((listItem) => {
+  arr.push(Number(listItem.innerText));
+  return arr;
+});
 
 const sumOfNumbers = (arr) => {
-    let sum = 0; 
-    for(let i = 0; i <= arr.length; i++) {
-        const num = arr[i];
-        sum += num
-    }
-    return sum; 
-}
-
+  let sum = 0;
+  for (let i = 0; i < arr.length; i++) {
+    num = arr[i];
+    sum += num;
+  }
+  return sum;
+};
 
 const average = (arr) => {
-    let sumOfNums = sumOfNumbers(arr) 
-    return sumOfNums / arr.length; 
-}
+  let sumOfNums = sumOfNumbers(arr);
+  return sumOfNums / arr.length;
+};
 
-let onlyOdds = arr => {
-    arr.filter(num => num % 2 === 1)
-}
-
-
+let onlyOdds = (arr) => {
+  return arr.filter((num) => num % 2 === 1);
+};
 
 const favoriteNumbers = () => {
-    // let list = document.querySelectorAll("#favorite-numbers li");
-    // let arr = []; 
+  let sumOfNums = sumOfNumbers(arr);
+  const averageOfNums = average(arr);
+  let onlyOddsOfNums = onlyOdds(arr);
 
-    // list.forEach(listItem => {
-    //      arr.push(Number(listItem.innerText))
-    // })
-    
+  const sumOfFav = document.querySelector("#sum-of-favorite-nums");
+  sumOfFav.textContent += sumOfNums;
 
-    const sum = sumOfNumbers(arr);
-    const averageOfNums = average(arr);
-    let onlyOddsOfNums = onlyOdds(arr);
+  const aveOfFav = document.querySelector("#average-of-favorite-nums");
+  aveOfFav.textContent += averageOfNums;
 
-    const sumOfFav = Number(document.querySelector("#sum-of-favorite-nums"));
-    sumOfFav.textContent += sum; 
+  let oddList = document.querySelector("#list-of-odd-favorite-nums");
 
-    const aveOfFav = document.querySelector("#average-of-favorite-nums");
-    aveOfFav.textContent += averageOfNums; 
-
-    let oddList = document.querySelector("#is-palindrome-p");
-    
-    const li = document.createElement("h1");
-    onlyOddsOfNums.forEach((odd) => {
-        debugger
-      li.innerText = odd;
-      oddList.removeChild(li);
-    });
-}
-    favoriteNumbers();
-
-
+  onlyOddsOfNums.forEach((odd) => {
+    let li = document.createElement("li");
+    li.innerText = odd;
+    oddList.appendChild(li);
+  });
+};
+favoriteNumbers();
 
 const incrementCount = () => {
-    const counter = Number(document.querySelector("#click-count"));
-    counter.textContent = counter.textContent + 1;
-}
+  const p = document.querySelector("#click-count"); // counter = 0
+  p.innerText  = Number(p.innerText) + 1;
+  debugger;
+};
 
 const reset = () => {
-    const counter = document.querySelector("#click-count");
-    counter.displayContent = 0;
-}
+  const counter = document.querySelector("#click-count");
+  counter.innerText = 0;
+};
 
 const addItem = () => {
-    const shoppingList = document.querySelector("ul");
-    const input = document.querySelector(".add-item")
-    const item = input;
-    const listItem = document.createElement("li");
-    listItem.textContent = item;
-    shoppingList.appendChild(listItem)
-    input.value = "Empty";
-}
+  const shoppingList = document.querySelector(".shopping-list");
+  const input = document.querySelector("#add-item");
+  const item = input.value;
+  const listItem = document.createElement("li");
+  listItem.textContent = item;
+  shoppingList.appendChild(listItem);
+};
 
 const killButton = () => {
-    const button = document.querySelector("#kill-button");
-    button.removeChild(button)
+  const button = document.querySelector("#kill-button");
+  button.removeChild(button);
 
-    const header = document.querySelector("#kill-button-header");
-    header.innerText = "Yay you were victorious!"
-    header.style.color = "green";
-}
+  const header = document.querySelector("#kill-button-header");
+  header.innerText = "Yay you were victorious!";
+  header.style.color = "green";
+};
