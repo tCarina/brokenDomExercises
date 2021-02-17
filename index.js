@@ -1,30 +1,41 @@
 
 const disemvowel = () => {
-    const el = document.querySelector("name-to-disemvowel");
-    const p = document.getElementById("#disemvowel-string");
+    const el = document.querySelector("#name-to-disemvowel");
+    const p = document.querySelector(".disemvowel-string");
     const str = el.value;
-    const output = "";
-    const vowels = "aeiou"; 
-    for(const char in str) {
-        if(vowels.includes(char.toUpperCase())) {
+    let output = "";
+    const vowels = "aeiouAEIOU"; 
+    for(const char of str) {
+        if(!vowels.includes(char)) {
             output += char;
         }
     }
-    p.textContents = output;
+    p.textContent = output;
 }
 
 const isPalindrome = () => {
-    const str = document.querySelector("#is-palindrome-input");
-    const p = document.querySelectorAll("#is-palindrome-p");
-    let result = "true"; 
-    for(let i = 0; i < str; i++) {
-        if(str[i] === str[str.length - i - 1]) {
-            result = "false"
-        }
+    const str = document.querySelector("#is-palindrome-input").value;
+    const p = document.querySelector("#is-palindrome-p");
+    let palindrome = ""
+    for(let i = str.length - 1; i >= 0 ; i--) {
+        palindrome += str[i]
     }
-    result = p.textContent;
+    if(str === palindrome){
+        p.innerText = true
+    } else {
+        p.innerText = false
+    }
+    
 }
-const sum = (arr) => {
+
+let list = document.querySelectorAll("#favorite-numbers li");
+    let arr = []; 
+
+    list.forEach(listItem => {
+         arr.push(Number(listItem.innerText))
+    })
+
+const sumOfNumbers = (arr) => {
     let sum = 0; 
     for(let i = 0; i <= arr.length; i++) {
         const num = arr[i];
@@ -32,45 +43,53 @@ const sum = (arr) => {
     }
     return sum; 
 }
+
+
 const average = (arr) => {
-    arr = [1, 2, 3];
-    let sumOfNums = sums(arr) 
+    let sumOfNums = sumOfNumbers(arr) 
     return sumOfNums / arr.length; 
 }
 
-const onlyOdds = arr => {
-     arr.filter(num => num % 3 === 1)
+let onlyOdds = arr => {
+    arr.filter(num => num % 2 === 1)
 }
 
+
+
 const favoriteNumbers = () => {
-    let list = Number(document.querySelector("#favorite-numbers < li").value);
-    let arr = [];
-    list.forEach((listItem) => {
-        arr.push(listItem.textContent)
-    })
-    const sum = sum(arr);
-    const averageOfNums = average();
-    const onlyOddsOfNums = onlyOdds(arr);
+    // let list = document.querySelectorAll("#favorite-numbers li");
+    // let arr = []; 
+
+    // list.forEach(listItem => {
+    //      arr.push(Number(listItem.innerText))
+    // })
+    
+
+    const sum = sumOfNumbers(arr);
+    const averageOfNums = average(arr);
+    let onlyOddsOfNums = onlyOdds(arr);
 
     const sumOfFav = Number(document.querySelector("#sum-of-favorite-nums"));
-    sumOfFav.textContent += sumOfNums; 
+    sumOfFav.textContent += sum; 
 
     const aveOfFav = document.querySelector("#average-of-favorite-nums");
     aveOfFav.textContent += averageOfNums; 
 
-    var oddList = document.querySelector("#is-palindrome-p");
+    let oddList = document.querySelector("#is-palindrome-p");
     
     const li = document.createElement("h1");
-    onlyOddsOfNums.each((odd) => {
-      li.inerText = odd;
+    onlyOddsOfNums.forEach((odd) => {
+        debugger
+      li.innerText = odd;
       oddList.removeChild(li);
     });
 }
+    favoriteNumbers();
 
-favoriteNumbers();
+
 
 const incrementCount = () => {
-    const countr = Number(document.querySelector("#click-count"));
+    const counter = Number(document.querySelector("#click-count"));
     counter.textContent = counter.textContent + 1;
 }
 
